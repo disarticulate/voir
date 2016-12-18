@@ -52,12 +52,12 @@
           }
         };
 
-        let isStarted = false;
-        let isJump = false;
+        const isStarted = false;
+        const isJump = false;
 
         if(window && window.__REDUX_DEVTOOLS_EXTENSION__){
           const devTools = window.__REDUX_DEVTOOLS_EXTENSION__.connect();
-          devTools.subscribe((message) => {
+          devTools.subscribe(function(message) {
             if (message.type === 'START') {
               isStarted = true;
               var state = JSON.parse(JSON.stringify(ret.getState()));
@@ -76,7 +76,7 @@
             }
           });
 
-          ret.subscribe((action,state) => {
+          ret.subscribe(function(action,state) {
             if (!isStarted) return;
             var state = JSON.parse(JSON.stringify(ret.getState()));
             action.type = action.type+(action.message?(":"+action.message):"")
